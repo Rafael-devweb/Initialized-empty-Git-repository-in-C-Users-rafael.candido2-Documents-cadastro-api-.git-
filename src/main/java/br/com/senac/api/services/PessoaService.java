@@ -1,5 +1,6 @@
 package br.com.senac.api.services;
 
+
 import br.com.senac.api.controllers.dtos.PessoaRequestDTO;
 import br.com.senac.api.entidades.Pessoa;
 import br.com.senac.api.repositorios.PessoaRepositorio;
@@ -28,4 +29,16 @@ public class PessoaService {
 
     }
 
+    public Pessoa atulizar(Long id, PessoaRequestDTO pessoa ) throws Exception {
+        if(pessoaRepositorio.existsById(id) == false){
+            throw new Exception("Registro não encontrado");
+
+        }
+        Pessoa pessoaPersit = new Pessoa ();
+        pessoaPersit.setNome(pessoa.getNome());
+        pessoaPersit.setNome(pessoa.getSobrenome());
+        pessoaPersit.setId(id);
+
+        return pessoaRepositorio.save(pessoaPersit);
+    }
 }

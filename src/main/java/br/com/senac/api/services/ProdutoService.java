@@ -1,6 +1,8 @@
 package br.com.senac.api.services;
 
+import br.com.senac.api.controllers.dtos.PessoaRequestDTO;
 import br.com.senac.api.controllers.dtos.ProdutoRequestDTO;
+import br.com.senac.api.entidades.Pessoa;
 import br.com.senac.api.entidades.Produto;
 import br.com.senac.api.repositorios.ProdutoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,12 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoRepositorio produtoRepositorio;
-    public List<Produto> listarTodos(){
+
+    public List<Produto> listarTodos() {
         return produtoRepositorio.findAll();
     }
-    public  Produto criar(ProdutoRequestDTO produto){
+
+    public Produto criar(ProdutoRequestDTO produto) {
 
         Produto produtoPersist = new Produto();
         produtoPersist.setNome(produto.getNome());
@@ -25,4 +29,16 @@ public class ProdutoService {
         return produtoRepositorio.save(produtoPersist);
     }
 
+    public Produto atulizar(Long id, ProdutoRequestDTO produto) throws Exception {
+        if (produtoRepositorio.existsById(id) == false) {
+            throw new Exception("Registro não encontrado");
+
+        }
+        Produto produtoPersist = new Produto();
+        produtoPersist.setNome(produto.getNome());
+        produtoPersist.setDescricao(produto.getDescricao());
+        produtoPersist.setId(id);
+
+        return produtoRepositorio.save(produtoPersist);
+    }
 }
