@@ -21,24 +21,38 @@ public class PessoaService {
     }
 
     public Pessoa criar (PessoaRequestDTO pessoa){
-        Pessoa pessoaPersist = new Pessoa();
-        pessoaPersist.setNome(pessoa.getNome());
-        pessoaPersist.setSobrenome(pessoa.getSobrenome());
+
+        Pessoa pessoaPersist = this.pessoaRequestDtoParaPessoa(pessoa);
 
         return pessoaRepositorio.save(pessoaPersist);
 
     }
 
     public Pessoa atulizar(Long id, PessoaRequestDTO pessoa ) throws Exception {
-        if(pessoaRepositorio.existsById(id) == false){
+        if(!pessoaRepositorio.existsById(id)){
             throw new Exception("Registro não encontrado");
 
         }
-        Pessoa pessoaPersit = new Pessoa ();
-        pessoaPersit.setNome(pessoa.getNome());
-        pessoaPersit.setNome(pessoa.getSobrenome());
+
+        Pessoa pessoaPersit = this.pessoaRequestDtoParaPessoa(pessoa);
         pessoaPersit.setId(id);
 
         return pessoaRepositorio.save(pessoaPersit);
+    }
+
+    public void  deletar(Long id){
+        if(!pessoaRepositorio.existsById(id)){
+            throw new RuntimeException("Registro não encontrado");
+        }
+
+        pessoaRepositorio.deleteById(id);
+    }
+
+    private Pessoa pessoaRequestDtoParaPessoa(PessoaRequestDTO in){
+        Pessoa out = new Pessoa();
+        out.setNome(in.getNome());
+        out.setSobrenome(in.getSobrenome());
+
+        return out;
     }
 }
