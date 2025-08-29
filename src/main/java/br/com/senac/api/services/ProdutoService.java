@@ -24,21 +24,29 @@ public class ProdutoService {
 
         Produto produtoPersist = new Produto();
         produtoPersist.setNome(produto.getNome());
-        produtoPersist.setDescricao(produto.getDescricao());
+        produtoPersist.setDescrição(produto.getDescricao());
 
         return produtoRepositorio.save(produtoPersist);
     }
 
-    public Produto atulizar(Long id, ProdutoRequestDTO produto) throws Exception {
+    public Produto atualizar(Long id, ProdutoRequestDTO produto) throws Exception {
         if (produtoRepositorio.existsById(id) == false) {
             throw new Exception("Registro não encontrado");
 
         }
         Produto produtoPersist = new Produto();
         produtoPersist.setNome(produto.getNome());
-        produtoPersist.setDescricao(produto.getDescricao());
+        produtoPersist.setDescrição(produto.getDescricao());
         produtoPersist.setId(id);
 
         return produtoRepositorio.save(produtoPersist);
+    }
+
+    public void deletar(Long id) {
+        if (!produtoRepositorio.existsById(id)) {
+            throw new RuntimeException("Registro não encontrado");
+        }
+
+        produtoRepositorio.deleteById(id);
     }
 }

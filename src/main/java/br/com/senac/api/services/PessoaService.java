@@ -28,7 +28,7 @@ public class PessoaService {
 
     }
 
-    public Pessoa atulizar(Long id, PessoaRequestDTO pessoa ) throws Exception {
+    public Pessoa atualizar(Long id, PessoaRequestDTO pessoa ) throws Exception {
         if(!pessoaRepositorio.existsById(id)){
             throw new Exception("Registro não encontrado");
 

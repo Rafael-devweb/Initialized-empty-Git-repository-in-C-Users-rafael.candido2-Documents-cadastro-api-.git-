@@ -37,7 +37,7 @@ public class PessoaController {
     public ResponseEntity<Pessoa> atulizar(@PathVariable Long id, @RequestBody PessoaRequestDTO pessoa) {
 
         try {
-            return ResponseEntity.ok(pessoaService.atulizar(id, pessoa));
+            return ResponseEntity.ok(pessoaService.atualizar(id, pessoa));
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);

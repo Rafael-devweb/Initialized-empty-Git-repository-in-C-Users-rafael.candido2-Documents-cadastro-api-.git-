@@ -32,15 +32,27 @@ public class CarroController {
         }
      }
      @PutMapping("/atulizar/{id}")
-    public  ResponseEntity<Carro> atulizar(@PathVariable Long id, @RequestBody CarroRequestDTO carro) {
+    public  ResponseEntity<Carro> atualizar(@PathVariable Long id, @RequestBody CarroRequestDTO carro) {
 
          try {
-             return ResponseEntity.ok(carroService.atulizar(id, carro));
+             return ResponseEntity.ok(carroService.atualizar(id, carro));
 
          } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
          }
 
      }
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        try{
+
+            carroService.deletar(id);
+            return ResponseEntity.ok(null);
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
+
+        }
     }
+
+}
 

@@ -25,7 +25,7 @@ public class CarroService {
         return carroRepositorio.save(carroPersist);
     }
 
-    public Carro atulizar(Long id, CarroRequestDTO carro ) throws Exception {
+    public Carro atualizar(Long id, CarroRequestDTO carro ) throws Exception {
         if(carroRepositorio.existsById(id) == false){
             throw new Exception("Registro não encontrado");
 
@@ -36,5 +36,12 @@ public class CarroService {
         carroPersit.setId(id);
 
         return carroRepositorio.save(carroPersit);
+    }
+    public void deletar(Long id) {
+        if (!carroRepositorio.existsById(id)) {
+            throw new RuntimeException("Registro não encontrado");
+        }
+
+        carroRepositorio.deleteById(id);
     }
 }

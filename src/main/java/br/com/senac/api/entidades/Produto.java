@@ -2,6 +2,9 @@ package br.com.senac.api.entidades;
 
 import jakarta.persistence.*;
 
+
+import jakarta.persistence.*;
+
 @Entity
 public class Produto {
 
@@ -13,7 +16,7 @@ public class Produto {
     private String nome;
 
     @Column
-    private String descricao;
+    private  String descrição;
 
     public Long getId() {
         return id;
@@ -31,14 +34,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getDiscricao() {
-        return descricao;
+    public String getDescrição() {
+        return descrição;
     }
 
-    public void setDiscricao(String discricao) {
-        this.descricao = discricao;
-    }
-
-    public void setDescricao(String descricao) {
+    public void setDescrição(String descrição) {
+        this.descrição = descrição;
     }
 }

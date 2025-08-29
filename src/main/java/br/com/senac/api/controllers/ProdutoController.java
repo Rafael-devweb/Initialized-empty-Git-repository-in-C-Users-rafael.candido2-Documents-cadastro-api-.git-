@@ -34,15 +34,27 @@ public class ProdutoController {
         }
     }
 
-    @PutMapping("/atulizar/{id}")
-    public ResponseEntity<Produto> atulizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO produto) {
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO produto) {
 
         try {
-            return ResponseEntity.ok(produtoService.atulizar(id, produto));
+            return ResponseEntity.ok(produtoService.atualizar(id, produto));
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
 
     }
+        @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        try{
+
+        produtoService.deletar(id);
+        return ResponseEntity.ok(null);
+    } catch (Exception e){
+        return ResponseEntity.badRequest().body(null);
+
+    }
+}
+
 }
